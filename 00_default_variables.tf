@@ -1,3 +1,7 @@
+variable "project" {
+	default = ""
+}
+
 variable "name" {
 	default = "default"
 }
@@ -59,3 +63,6 @@ variable "scripts" {
 	default = []
 }
 
+variable "allowed_ports" {
+	default = ["22"]
+}
