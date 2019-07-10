@@ -14,12 +14,13 @@ resource "google_compute_instance" "default" {
 			// Ephemeral IP
 		}
 	}
-	metadata {
+	metadata = {
     	sshKeys = "${var.ssh_user}:${file("${var.public_key}")}"
   	}	
-	connection = {
+	connection {
 		type = "ssh"
 		user = "${var.ssh_user}"
+    host = "${google_compute_instance.default.network_interface.0.access_config.0.assigned_nat_ip}"
 		private_key = "${file("${var.private_key}")}"
 	}
 	provisioner "remote-exec" {
